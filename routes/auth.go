@@ -9,5 +9,7 @@ func AuthRouter(r *mux.Router) {
 	router := r.PathPrefix("/auth").Subrouter()
 
 	router.HandleFunc("/register", controllers.Register).Methods("POST")
-	//router.HandleFunc("/login", controllers.Login).Methods("POST")
+	router.HandleFunc("/login", controllers.Login).Methods("POST")
+	//router.HandleFunc("/protected", controllers.ProtectedHandler).Methods("GET")
+
 }

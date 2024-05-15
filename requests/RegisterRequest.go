@@ -6,3 +6,8 @@ type RegisterRequest struct {
 	Password        string `json:"password"`
 	PasswordConfirm string `json:"PasswordConfirm"`
 }
+
+type LoginRequest struct {
+	Email    string `json:"email"`
+	Password string `json:"password"`
+}
