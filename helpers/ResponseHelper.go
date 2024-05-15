@@ -6,13 +6,13 @@ import (
 )
 
 type ResponseWithData struct {
-	Status  string `json:"status"`
+	Status  bool   `json:"status"`
 	Message string `json:"message"`
 	Data    any    `json:"data"`
 }
 
 type ResponseWithoutData struct {
-	Status  string `json:"status"`
+	Status  bool   `json:"status"`
 	Message string `json:"message"`
 	Data    any    `json:"data"`
 }
@@ -22,10 +22,10 @@ func ResponseHelper(w http.ResponseWriter, code int, message string, payload int
 	w.WriteHeader(code)
 
 	var response any
-	status := "success"
+	status := true
 
 	if code >= 400 {
-		status = "failed"
+		status = false
 	}
 
 	if payload != nil {
@@ -35,7 +35,7 @@ func ResponseHelper(w http.ResponseWriter, code int, message string, payload int
 			Data:    payload,
 		}
 	} else {
-		response = &ResponseWithoutData{
+		response = &ResponseWithData{
 			Status:  status,
 			Message: message,
 		}
@@ -43,4 +43,8 @@ func ResponseHelper(w http.ResponseWriter, code int, message string, payload int
 
 	res, _ := json.Marshal(response)
 	w.Write(res)
+}
+
+func createResponse(data interface{}) {
+
 }

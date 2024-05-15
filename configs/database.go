@@ -15,7 +15,10 @@ func ConnectDB() {
 		panic("failed to connect database")
 	}
 
-	db.AutoMigrate(&models.User{})
+	err1 := db.AutoMigrate(&models.User{})
+	if err1 != nil {
+		return
+	}
 
 	DB = db
 	log.Println("Database Connected")
